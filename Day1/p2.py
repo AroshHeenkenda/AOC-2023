@@ -26,16 +26,20 @@ def p2():
             
             else:
                 for j in range(len(chars)):
-                    if (len(line[i:]) >= len((chars[j]))) and (chars[j] == line[i:len(chars[j])+1]):
-                        num += str(j)
+                    if (len(line[i:]) >= len((chars[j]))) and (chars[j] == line[i:i+len(chars[j])]):
+                        num += str(j+1)
                         incr = True
-                        i += len(chars[j])
+                        i += len(chars[j])-1
                         break
             
-            if incr:
+            if not incr:
                 i += 1
+        print(f"Number: {num}")
+        print(f"2 Digit: {num[0]+num[-1]}")
 
         total += int(num[0]+num[-1])
+
+        print(f"Total: {total}\n")
         
     f.close()
     return total
