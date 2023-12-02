@@ -16,36 +16,27 @@ def p2():
             for j in range(len(line[1][i])):
                 line[1][i][j] = line[1][i][j].split()
     
-    R, G, B = 12, 13, 14
     total = 0
 
     for line in lines:
-        valid = True
-        num = line[0]
+        R, G, B = 0, 0, 0
         
         for i in range(len(line[1])):
-
-            db = False
 
             for j in range(len(line[1][i])):
                 count, col = int(line[1][i][j][0]), line[1][i][j][1]
 
                 if col == "red":
                     if count > R:
-                        db = True
+                        R = count
                 elif col == "green":
                     if count > G:
-                        db = True
+                        G = count
                 elif col == "blue":
                     if count > B:
-                        db = True
-
-            if db:
-                valid = False
-                break
-
-        if valid:
-            total += num
+                        B = count
+        
+        total += (R*G*B)
 
     return total
 
