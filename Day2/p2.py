@@ -2,7 +2,7 @@
 
 def p2():
     
-    f = open("in2.txt")
+    f = open("in.txt")
 
     lines = [line.strip().split(": ") for line in f.readlines()]
 

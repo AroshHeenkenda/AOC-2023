@@ -1,6 +1,6 @@
 
 def p2():
-    f = open("input2.txt")
+    f = open("in.txt")
 
     lines = [line.strip() for line in f.readlines()]
 

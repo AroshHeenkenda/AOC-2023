@@ -2,46 +2,40 @@
 def p2():
 
     f = open("in.txt")
-    lines = [line.strip().split(": ") for line in f.readlines()]
+    lines = [line.strip().split(": ")[1] for line in f.readlines()]
     f.close()
 
-    cards = [{"occ": 1, "nums": 1}]*len(lines)
+    cards = []
 
     for i in range(len(lines)):
-        lines[i][1] = lines[i][1].split(" | ")
-        lines[i][0] = int(lines[i][0].replace("Card ", ""))
+        lines[i] = lines[i].split(" | ")
 
-        for j in range(len(lines[i][1])):
-            lines[i][1][j] = [int(num) for num in lines[i][1][j].split()]
+        lines[i][0] = [int(num) for num in lines[i][0].split()]
+        lines[i][1] = [int(num) for num in lines[i][1].split()]
+        
+        win = lines[i][0]
+        nums = lines[i][1]
 
-    new = True
-    while new:
+        match_c = 0
+        for num in nums:
+            if num in win:
+                match_c += 1
+        
+        cards.append({"in": 1, "match": match_c})
+    
+    for i in range(len(cards)):
 
-        new = False
+        m = cards[i]["match"]
+        ins = cards[i]["in"]
 
-        for i in range(len(cards)):
+        if m != 0:
 
-            if cards[i]["nums"] > 0:
-                cards[i]["nums"] -= 1
+            for j in range(i+1, i+1+m):
+                cards[j]["in"] += ins
 
-                win, mine = lines[i][1]
-                count = 0
-                for m in mine:
-                    if m in win:
-                        count += 1
-                
-                if count > 0:
-                    new = True
-                
-                if (i + 1 +count) > len(lines):
-                    count = len(lines) - 1
-
-                for inc in range(i+1, i+1+count):
-                    cards[inc]["nums"] += 1
-                    cards[inc]["occ"] += 1
-
-    for card in cards:
-        total += card["occ"]
+    total = 0
+    for i in range(len(cards)):
+        total += cards[i]["in"]
 
     return total
 

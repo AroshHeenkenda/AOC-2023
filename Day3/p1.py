@@ -2,7 +2,7 @@
 
 def p1():
 
-    f = open("in1.txt")
+    f = open("in.txt")
 
     lines = [line.strip() for line in f.readlines()]
 

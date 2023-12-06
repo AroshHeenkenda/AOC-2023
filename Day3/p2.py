@@ -1,6 +1,6 @@
 import re
 
-lines = list(open('in2.txt', 'r'))
+lines = list(open('in.txt', 'r'))
 p1_total = 0
 symbols = {} 
 gears = {}
